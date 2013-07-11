@@ -1,0 +1,53 @@
+#console-results {
+    margin: 0 auto;
+    width: 950px;
+}
+
+h2 {
+    margin: 6px 0px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: "Microsoft Yahei";
+}
+
+#console-results .line {
+    border-bottom: 1px solid black;
+    padding-top: 10px;
+
+}
+
+#console-results .log {
+    border: 1px solid black;
+    border-radius: 20px 20px 20px 20px;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding: 10px;
+
+}
+
+#console-results .err, #console-results .warn {
+    margin-left: 30px;
+    padding: 4px;
+    padding-left: 10px;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+#console-results .err {
+    background-color: ButtonText;
+    color: white;
+}
+
+#console-results .warn {
+    background-color: #00DABD;
+    color: white;
+
+}
+
+.suojin {
+    padding-left: 40px;
+}
+
+.span8 ol {
+    padding-left: 40px;
+}

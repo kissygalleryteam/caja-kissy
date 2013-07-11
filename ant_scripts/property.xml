@@ -1,0 +1,16 @@
+<project name="property.build" default="property" basedir="" xmlns:ac="anttools:net.sf.antcontrib">
+    
+	<property name="root.dir" value="..//"/>
+    <property name="build" value="${root.dir}/build"/>
+    <property name="lib" value="${root.dir}/lib"/>
+    <property name="src" value="${root.dir}/src"/>
+
+
+    <property name="charset" value="gbk"/>
+
+    <!--tools-->
+    <property name="yui.compiler" value="${lib}\yuicompressor\yuicompressor.jar"/>
+
+
+
+</project>

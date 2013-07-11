@@ -1,0 +1,60 @@
+<project name="compressor.build" default="caja" basedir="." xmlns:ac="antlib:net.sf.antcontrib">
+
+    <import file="property.xml"/>
+
+    <!--
+        build工程以前，首先应该清除build里面的文件
+    -->
+    <target name="clearfile">
+        <delete>
+            <fileset dir="${build}" includes="**/**/**/*.css,**/**/**/**/*.js"/>
+        </delete>
+    </target>
+
+
+
+    <target name="src-to-build">
+        <copy todir="${build}">
+            <fileset dir="${src}/scripts/"/>
+        </copy>
+    </target>
+
+    <!-- 对 JS 文件 ASCII 化 -->
+    <target name="native2ascii" depends="src-to-build">
+        <mkdir dir="${build}/tmp"/>
+        <copy todir="${build}/tmp">
+            <fileset dir="${build}"/>
+        </copy>
+        <native2ascii encoding="${charset}"
+                      src="${build}/tmp/"
+                      dest="${build}"
+                      includes="**/*-min.js">
+        </native2ascii>
+        <delete dir="${build}/tmp"/>
+    </target>
+    <!-- END OF 对 JS 文件 ASCII 化 -->
+
+
+    <!-- 用 YUICompressor 压缩 CSS,JS -->
+    <target name="compress" depends="native2ascii">
+        <delete failonerror="false">
+            <fileset dir="${build}" includes="*-min.css,*-min.js"/>
+        </delete>
+        <apply executable="java" verbose="true" dest="${build}">
+            <fileset dir="${build}" includes="**/**/*.css,**/**/*.js"/>
+            <arg line="-jar"/>
+            <arg path="${yui.compiler}"/>
+            <arg line="--charset ${charset}"/>
+            <srcfile/>
+            <arg line="-o"/>
+            <targetfile/>
+            <mapper type="regexp" from="^(.*)\.(css|js)$" to="\1-min.\2"/>
+        </apply>
+    </target>
+    <!-- END OF 用YUICompressor 压缩 CSS -->
+
+    <!--工程入口文件, build的默认任务-->
+    <target name="caja" depends="clearfile, compress">
+    </target>
+
+</project>
